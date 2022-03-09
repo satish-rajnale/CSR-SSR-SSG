@@ -37,9 +37,11 @@ export default function Home() {
   useEffect(() => {
     async function getPokemon() {
       const resp = await fetch(
-        "https://jherr-pokemon.s3.us-west-1.amazonaws.com/index.json"
+        `https://run.mocky.io/v3/9d71cb03-a9f9-4d70-bae2-9d3adaa1cfe7`
       );
-      setPokemon(await resp.json());
+      const data = await resp.json();
+      console.log(data);
+      setPokemon(data);
     }
     getPokemon();
   }, []);
