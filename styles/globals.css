@@ -1,9 +1,14 @@
 html,
 body {
-  padding: 1rem;
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  padding: 0;
+  font-family: "Roboto Condensed", sans-serif;
+  /* background-image: url("../public/rest0-back.jpg"); */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  align-items: center;
+  justify-content: center;
 }
 
 a {
@@ -13,4 +18,7 @@ a {
 
 * {
   box-sizing: border-box;
+}
+:root {
+  --darkgray: #2c3e50;
 }
