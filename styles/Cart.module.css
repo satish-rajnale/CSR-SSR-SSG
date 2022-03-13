@@ -1,0 +1,33 @@
+.container {
+  padding: 2rem;
+}
+
+.main {
+  height: 88vh;
+  width: 92vw;
+  padding: 1rem 4rem;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: fit-content;
+}
+
+.centerContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.summary {
+  min-height: 350px;
+  width: 350px;
+  padding: 20px;
+  background-color: rgb(217, 233, 248);
+}

@@ -1,11 +1,14 @@
 import React from "react";
 import styles from "../styles/Card.module.css";
 import RestaurantType from "../types";
-import { BiLogIn } from "react-icons/bi";
+import { BiFoodTag } from "react-icons/bi";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 import { useEffect, useState } from "react";
-import { incrementCartCount } from "../store/restaurantReducer";
+import {
+  incrementCartCount,
+  reduceCartCount,
+} from "../store/restaurantReducer";
 import { ReactReduxContext, useDispatch, useSelector } from "react-redux";
 
 function Food({
@@ -19,21 +22,23 @@ function Food({
 }) {
   const [productCount, setProductCount] = useState("0");
   const dispatch = useDispatch();
-  const store = useSelector((state) => state.allData);
+  const store = useSelector((state) =>
+    state.cart.filter((obj) => obj.id == item.id)
+  );
 
   console.log(store);
-  // useEffect(() => {
-  //   if (store.length != 0) {
-  //     setProductCount(store[0].count);
-  //   }
-  // }, [store]);
+  useEffect(() => {
+    if (store.length != 0) {
+      setProductCount(store[0].count);
+    }
+  }, [store]);
 
   function updateCartCount() {}
   return (
     <div className={styles.card}>
       <div className={styles.content}>
         <div className={styles.category} data-testid={`card-category`}>
-          <BiLogIn />
+          <BiFoodTag color={item.category == "veg" ? "green" : "red"} />
         </div>
         <h4 className={styles.name}>{item.name}</h4>
 
@@ -48,7 +53,7 @@ function Food({
         </button> */}
         {withclosebutton ? (
           <button className={styles.button} onClick={() => {}}>
-            <BiLogIn />
+            <BiFoodTag />
           </button>
         ) : null}
         <p className={styles.statusDesc}>{item.statusDesc}</p>
@@ -94,6 +99,7 @@ function Food({
               // dispatch({
               //   type: "SET_SUBTOTAL",
               // });
+              dispatch(reduceCartCount({ id: item.id }));
             }}
           >
             <AiOutlineMinus />

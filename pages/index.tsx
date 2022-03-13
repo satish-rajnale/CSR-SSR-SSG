@@ -27,6 +27,7 @@ import categoryReducer, {
 import { BiLogOut } from "react-icons/bi";
 import RestaurantType from "../types";
 import Header from "../Components/Header";
+import Link from "next/link";
 const Home: NextPage = () => {
   const [appState, dispatchToReducer] = useReducer(fetchReducer, initialState);
   const [categoryState, dispatchToCategoryReducer] = useReducer(
@@ -171,12 +172,7 @@ const Home: NextPage = () => {
       categoryState.selectedresto,
       categoryState.selectedCategory
     );
-    dispatch(
-      updateCategory({
-        id: categoryState.selectedresto.id,
-        category: categoryState.selectedCategory,
-      })
-    );
+
     await dispatchToCategoryReducer({
       type: "closeMOdal",
     });
@@ -229,16 +225,18 @@ const Home: NextPage = () => {
         />
       </Head>
       <div style={{ position: "fixed" }}>
-        <button
-          type="button"
-          className={styles.logoutBtn}
-          onClick={signOutUser}
-        >
-          <span className={styles.button__text}> Log out</span>
-          <span className={styles.button__icon}>
-            <BiLogOut />
-          </span>
-        </button>
+        <Link href={"/cart"}>
+          <button
+            type="button"
+            className={styles.logoutBtn}
+            // onClick={signOutUser}
+          >
+            <span className={styles.button__text}> Go to CArt</span>
+            <span className={styles.button__icon}>
+              <BiLogOut />
+            </span>
+          </button>
+        </Link>
       </div>
       <Header />
       <UpdateCategory {...modalObj} />
