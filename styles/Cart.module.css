@@ -1,0 +1,75 @@
+.main {
+  height: 100vh;
+  width: 92vw;
+  padding: 1rem 4rem;
+  flex: 1;
+}
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+}
+
+.centerContent {
+  justify-content: center;
+  align-items: center;
+  min-width: 400px;
+  padding: 4rem;
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+
+.summary {
+  min-height: 300px;
+  width: 350px;
+  padding: 20px;
+  background-color: rgb(217, 233, 248);
+}
+
+.cartBtn {
+  width: 350px;
+  align-self: center;
+  height: 50px;
+  background-color: rgb(219, 78, 60);
+  color: white;
+}
+
+.logoutBtn {
+  margin-top: 5px;
+  display: flex;
+  height: 40px;
+  padding: 0;
+  background: #b8250b;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  overflow: hidden;
+  font-family: "Quicksand", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.logoutBtn:hover {
+  background: #d65b14;
+}
+
+.button__text,
+.button__icon {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 7px;
+  color: #fff;
+  height: 100%;
+}
+
+.button__icon {
+  font-size: 1.5em;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.flexed {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

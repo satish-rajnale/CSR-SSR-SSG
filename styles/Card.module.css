@@ -1,0 +1,91 @@
+.card {
+  width: 100%;
+  min-height: 200px;
+  border-top: 2px solid rgb(192, 192, 192);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  padding: 30px 10px;
+  align-items: center;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+}
+.category {
+  font-size: 14px;
+  font-weight: bold;
+}
+.image {
+  width: 180px;
+  height: 180px;
+}
+
+.statusDesc {
+  color: rgb(185, 184, 184);
+  font-size: 18px;
+  font-weight: 600;
+  width: 80%;
+}
+
+.button {
+  background-color: #fff;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.name {
+  color: "#5a647d";
+  font-weight: "bold";
+  font-size: 30;
+}
+
+.input {
+  width: 3rem;
+  height: 3rem;
+  outline: none;
+  border: none;
+  text-align: center;
+  font-size: larger;
+}
+
+.description {
+  font-size: 10;
+  color: "#c1c4cd";
+}
+.wrapper {
+  flex-direction: "row";
+  height: 150;
+  display: "flex";
+  align-items: "center";
+  padding: 14;
+  background-color: "#ffffff";
+  width: "92%";
+  border-radius: 10;
+}
+.imageWrapper {
+  margin-right: 10;
+}
+.image {
+  width: 110;
+  height: 130;
+  resize: "contain";
+}
+.title {
+  font-size: 15;
+  font-weight: "400";
+
+  width: 50;
+}
