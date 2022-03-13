@@ -3,7 +3,7 @@ import styles from "../styles/Card.module.css";
 import RestaurantType from "../types";
 import { BiFoodTag } from "react-icons/bi";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-import { MdDelete } from "react-icons/Md";
+import { MdDelete } from "react-icons/md";
 
 import { useEffect, useState } from "react";
 import {
