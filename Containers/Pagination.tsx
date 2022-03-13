@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "../styles/Home.module.css";
-import paginationStyles from "../styles/pagination.module.css";
+import paginationStyles from "../styles/Pagination.module.css";
 import {
   BsFillArrowRightSquareFill,
   BsFillArrowLeftSquareFill,
@@ -51,7 +50,12 @@ export default function Pagination({
     <div>
       <section>
         {getPaginatedData().map((d, idx) => (
-          <Food key={idx} item={d} openModal={openModal} />
+          <Food
+            key={idx}
+            item={d}
+            withRemoveBtn={false}
+            isSidebarList={false}
+          />
         ))}
       </section>
 

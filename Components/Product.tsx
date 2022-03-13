@@ -15,12 +15,10 @@ import { ReactReduxContext, useDispatch, useSelector } from "react-redux";
 
 function Food({
   item,
-  openModal,
   withRemoveBtn,
   isSidebarList,
 }: {
   item: RestaurantType;
-  openModal: (val: RestaurantType) => void;
   withRemoveBtn: boolean;
   isSidebarList: boolean;
 }) {
@@ -61,13 +59,6 @@ function Food({
 
         {!isSidebarList && <h4 className={styles.price}>₹{item.price}</h4>}
 
-        {/* <button
-          className={styles.btnContainer}
-          data-testid={`card-button-${item.id}`}
-          onClick={() => openModal(item)}
-        >
-          EDIT
-        </button> */}
         {withRemoveBtn ? (
           <span onClick={() => dispatch(deleteRecord({ id: item.id }))}>
             <MdDelete color="red" />
