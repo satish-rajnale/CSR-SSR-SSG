@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Resaurant from "../Components/Resaurant";
+import Resaurant from "../Components/Product";
 import styles from "../styles/Home.module.css";
 import paginationStyles from "../styles/pagination.module.css";
 import {
