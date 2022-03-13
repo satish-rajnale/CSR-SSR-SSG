@@ -7,6 +7,7 @@ import styles from "../styles/CArt.module.css";
 
 const cart = () => {
   const [productList, setProductList] = useState([]);
+  const [discount, setdiscount] = useState(0);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const mainData = useSelector((state) => state.allData);
@@ -31,11 +32,15 @@ const cart = () => {
   }, [cart, mainData]);
 
   console.log(cart);
-  //   useEffect(() => {
-  //     if (store.length != 0) {
-  //       setProductList(store);
-  //     }
-  //   }, [store]);
+  useEffect(() => {
+    if (subtotal <= 100) {
+      setdiscount(0);
+    } else if (subtotal > 100 && subtotal <= 500) {
+      setdiscount((subtotal * 10) / 100);
+    } else {
+      setdiscount((subtotal * 20) / 100);
+    }
+  }, [subtotal]);
 
   return (
     <div className={styles.main}>
@@ -59,8 +64,26 @@ const cart = () => {
             <Food key={index} item={item} />
           ))}
         </div>
-        <div className={styles.summary}>
-          <h3>Subtotal: {subtotal}</h3>
+        <div>
+          <div className={styles.summary}>
+            <div className={styles.flexed}>
+              {" "}
+              <h3>Subtotal:</h3> <h3>₹{subtotal}</h3>
+            </div>
+            <div className={styles.flexed}>
+              {" "}
+              <h3>Discount:</h3> <h3>- ₹{discount}</h3>
+            </div>
+            <div className={styles.flexed}>
+              {" "}
+              <h3>Shipping Charges:</h3> <h3>Free</h3>
+            </div>
+            <div className={styles.flexed}>
+              {" "}
+              <h3>Total:</h3> <h3>₹{subtotal - discount}</h3>
+            </div>
+          </div>
+          <button className={styles.cartBtn}>Proceed to Pay</button>
         </div>
       </div>
     </div>

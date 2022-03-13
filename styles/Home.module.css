@@ -1,19 +1,19 @@
 .container {
   padding: 2rem;
+  overflow: auto;
+
+  align-items: center;
 }
 
 .main {
   height: 88vh;
   width: 92vw;
-  padding: 1rem 4rem;
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 .mainContainer {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   height: fit-content;
 }
@@ -22,7 +22,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 .loginContainer {
   color: #fff;
@@ -60,17 +59,27 @@
 }
 .sideBar {
   height: fit-content;
-
+  margin-left: 50px;
   background-color: #ffffff;
-  padding: 0 6px;
   border-radius: 5px;
   margin-top: 5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
   padding-bottom: 10px;
 }
+.checkoutBtn {
+  width: 350px;
+  align-self: center;
+  height: 50px;
+  background-color: rgb(63, 139, 32);
+  color: white;
+  outline: none;
+  border: none;
+  font-size: large;
+}
+
 .sideBar h2 {
   color: #1996f7;
   padding: 0 22px;

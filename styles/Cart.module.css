@@ -23,11 +23,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 400px;
 }
 
 .summary {
-  min-height: 350px;
+  min-height: 300px;
   width: 350px;
   padding: 20px;
   background-color: rgb(217, 233, 248);
+}
+
+.cartBtn {
+  width: 350px;
+  align-self: center;
+  height: 50px;
+  background-color: rgb(219, 78, 60);
+  color: white;
+}
+
+.flexed {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -28,6 +28,7 @@ import { BiLogOut } from "react-icons/bi";
 import RestaurantType from "../types";
 import Header from "../Components/Header";
 import Link from "next/link";
+import Food from "../Components/Product";
 const Home: NextPage = () => {
   const [appState, dispatchToReducer] = useReducer(fetchReducer, initialState);
   const [categoryState, dispatchToCategoryReducer] = useReducer(
@@ -238,45 +239,12 @@ const Home: NextPage = () => {
           </button>
         </Link>
       </div>
-      <Header />
-      <UpdateCategory {...modalObj} />
+
       <div className={styles.main}>
         <div className={styles.mainContainer}>
           <div className={styles.centerContent}>
-            <div style={{ display: "flex" }}>
-              <div className={styles.selectContainer}>
-                <select
-                  data-testid="filterBy"
-                  className={styles.selectSearch}
-                  onChange={({ target }) => handleSearchBy(target.value)}
-                >
-                  <option className={styles.searchOption} value="name">
-                    Name
-                  </option>
-                  <option className={styles.searchOption} value="opening_times">
-                    Opening time
-                  </option>
-                </select>
-              </div>
-              <input
-                disabled={appState.loading || appState.error}
-                className={styles.searchInput}
-                data-testid="searchInput"
-                value={searchVal}
-                placeholder="search for resto"
-                onChange={handleSearch}
-              />
-              <div
-                className={styles.removeFiltersBtn}
-                title="Clear all filters"
-                onClick={resetFilters}
-                data-testid="removeFilters"
-              >
-                <span className={styles.button__icon}>
-                  <FiXSquare />
-                </span>
-              </div>
-            </div>
+            <Header />
+
             {appState.loading ? (
               <div className={styles.withoutContent}>Loading...</div>
             ) : appState.error ? (
@@ -299,6 +267,50 @@ const Home: NextPage = () => {
                 />
               </>
             )}
+          </div>
+          <div className={styles.sideBar}>
+            <div
+              style={{
+                alignItems: "flex-start",
+                padding: "5px",
+                width: "100%",
+              }}
+            >
+              <h1 style={{ paddingLeft: "20px", margin: 0, color: "#000" }}>
+                Cart
+              </h1>
+              <h5 style={{ paddingLeft: "20px", margin: 0, color: "grey" }}>
+                {storedata.cart.length} ITEMS
+              </h5>
+              <div
+                style={{
+                  alignItems: "center",
+                  maxHeight: "300px",
+                  overflowY: "auto",
+                }}
+              >
+                {storedata.cart.map((obj) => {
+                  let item = storedata.allData.find(
+                    (obj1) => obj1.id == obj.id
+                  );
+                  return <Food item={item} isSidebarList={true} />;
+                })}
+              </div>
+              <div
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  paddingLeft: "20px",
+                  paddingRight: "20px",
+                  alignItems: "center",
+                }}
+              >
+                <h3>Subtotal:</h3>
+                <h3>₹ {storedata.subtotal}</h3>
+              </div>
+            </div>
+            <button className={styles.checkoutBtn}>Checkout</button>
           </div>
         </div>
       </div>

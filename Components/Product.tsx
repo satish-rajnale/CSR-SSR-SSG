@@ -15,34 +15,50 @@ function Food({
   item,
   openModal,
   withclosebutton,
+  isSidebarList,
 }: {
   item: RestaurantType;
   openModal: (val: RestaurantType) => void;
   withclosebutton: boolean;
+  isSidebarList: boolean;
 }) {
   const [productCount, setProductCount] = useState("0");
   const dispatch = useDispatch();
-  const store = useSelector((state) =>
+  const product = useSelector((state) =>
     state.cart.filter((obj) => obj.id == item.id)
   );
 
-  console.log(store);
+  console.log(product);
   useEffect(() => {
-    if (store.length != 0) {
-      setProductCount(store[0].count);
+    if (product.length != 0) {
+      setProductCount(product[0].count);
+    } else {
+      setProductCount("0");
     }
-  }, [store]);
+  }, [product]);
 
   function updateCartCount() {}
   return (
-    <div className={styles.card}>
-      <div className={styles.content}>
-        <div className={styles.category} data-testid={`card-category`}>
+    <div
+      className={styles.card}
+      style={isSidebarList && { minHeight: "100px" }}
+    >
+      <div
+        className={styles.content}
+        style={isSidebarList && { padding: 0, justifyContent: "space-evenly" }}
+      >
+        <div
+          className={styles.category}
+          data-testid={`card-category`}
+          style={isSidebarList && { position: "relative" }}
+        >
           <BiFoodTag color={item.category == "veg" ? "green" : "red"} />
         </div>
-        <h4 className={styles.name}>{item.name}</h4>
+        <h4 className={styles.name} style={isSidebarList && { width: "120px" }}>
+          {item.name}
+        </h4>
 
-        <p className={styles.price}>₹{item.price}</p>
+        {!isSidebarList && <h4 className={styles.price}>₹{item.price}</h4>}
 
         {/* <button
           className={styles.btnContainer}
@@ -56,23 +72,28 @@ function Food({
             <BiFoodTag />
           </button>
         ) : null}
-        <p className={styles.statusDesc}>{item.statusDesc}</p>
+        {!isSidebarList && (
+          <p className={styles.statusDesc}>{item.statusDesc}</p>
+        )}
       </div>
       <div>
-        <img className={styles.image} src={item.image_url} />
+        {!isSidebarList && (
+          <img className={styles.image} src={item.image_url} />
+        )}
         <div
           style={{
             display: "flex",
             flexDirection: "row",
             position: "relative",
-            right: "-10%",
+            right: !isSidebarList && "-10%",
             width: "fit-content",
             border: "1px solid black",
-            bottom: 26,
+            bottom: !isSidebarList && 26,
           }}
         >
           <div
             className={styles.button}
+            style={isSidebarList && { width: "30px", height: "30px" }}
             onClick={() => {
               // dispatch({
               //   type: "REDUCE_COUNT",
@@ -85,11 +106,16 @@ function Food({
               dispatch(incrementCartCount({ id: item.id }));
             }}
           >
-            <AiOutlinePlus />
+            <AiOutlinePlus color="rgb(97, 197, 57)" />
           </div>
-          <input className={styles.input} value={String(productCount)} />
+          <input
+            className={styles.input}
+            value={String(productCount)}
+            style={isSidebarList && { width: "30px", height: "30px" }}
+          />
           <div
             className={styles.button}
+            style={isSidebarList && { width: "30px", height: "30px" }}
             onClick={() => {
               updateCartCount();
               // dispatch({
@@ -106,6 +132,7 @@ function Food({
           </div>
         </div>
       </div>
+      {isSidebarList && <h4 className={styles.price}>₹{item.price}</h4>}
     </div>
   );
 }
