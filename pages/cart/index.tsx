@@ -1,3 +1,4 @@
+import { NextPage } from "next";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { BiLogOut } from "react-icons/bi";
@@ -7,7 +8,7 @@ import Food from "../../Components/Product";
 import { destroyCart } from "../../store/restaurantReducer";
 import styles from "../../styles/Cart.module.css";
 
-const cart = () => {
+const Cart: NextPage = () => {
   const [productList, setProductList] = useState([]);
   const [discount, setdiscount] = useState(0);
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const cart = () => {
   }, [subtotal]);
 
   function submitCartAndBacktoHome() {
-    dispatch(destroyCart());
+    dispatch(destroyCart({}));
     window.location.href = "/";
   }
 
@@ -68,7 +69,12 @@ const cart = () => {
         <div className={styles.centerContent}>
           {productList.length > 0 ? (
             productList.map((item, index) => (
-              <Food key={index} item={item} withRemoveBtn={true} />
+              <Food
+                key={index}
+                item={item}
+                withRemoveBtn={true}
+                isSidebarList={false}
+              />
             ))
           ) : (
             <h1>NO ITEMS IN CART</h1>
@@ -102,4 +108,4 @@ const cart = () => {
   );
 };
 
-export default cart;
+export default Cart;

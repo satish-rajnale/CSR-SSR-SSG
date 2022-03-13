@@ -272,11 +272,18 @@ const Home: NextPage = () => {
                   overflowY: "auto",
                 }}
               >
-                {storedata.cart.map((obj) => {
+                {storedata.cart.map((obj, index) => {
                   let item = storedata.allData.find(
                     (obj1) => obj1.id == obj.id
                   );
-                  return <Food item={item} isSidebarList={true} />;
+                  return (
+                    <Food
+                      key={index}
+                      item={item}
+                      isSidebarList={true}
+                      withRemoveBtn={false}
+                    />
+                  );
                 })}
               </div>
               <div
