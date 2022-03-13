@@ -6,24 +6,61 @@ const restoSlice = createSlice({
   initialState: {
     LastDoc: <DocumentSnapshot>{},
     allData: <RestaurantType[]>[],
+    cart: <Array<{ id: string; count: number }>>[],
   },
   reducers: {
     addRestoData: (state, action) => {
-      state.allData = action.payload.allData;
+      const modArr = [...action.payload.allData].map((item) => {
+        item.count = 0;
+        return item;
+      });
+      state.allData = modArr;
       state.LastDoc = action.payload.LastDoc;
     },
-    updateCategory: (state, action) => {
-      state.allData = state.allData.map((obj: RestaurantType) => {
-        if (obj.id == action.payload.id) {
-          obj.category = action.payload.category;
+    incrementCartCount: (state, action) => {
+      const isInCart = state.cart.findIndex(
+        (obj) => obj.id == action.payload.receivedId
+      );
+      if (isInCart != -1) {
+        let newVal = state.cart[isInCart].count + 1;
+
+        state.cart[isInCart].count = newVal;
+      }
+      state.cart.push({ id: action.payload.receivedId, count: 1 });
+    },
+
+    reduceCartCount: (state, action) => {
+      const isInCart = state.cart.findIndex(
+        (obj) => obj.id == action.payload.receivedId
+      );
+      if (isInCart != -1) {
+        if (state.cart[isInCart].count != 0) {
+          let newVal = state.cart[isInCart].count - 1;
+
+          state.cart[isInCart].count = newVal;
+
+          state.cart[isInCart].count = newVal;
         }
-        return obj;
-      });
+      }
+    },
+
+    deleteRecord: (state, action) => {
+      const isInCart = state.cart.findIndex(
+        (obj) => obj.id == action.payload.id
+      );
+      if (isInCart != -1) {
+        state.cart.splice(isInCart, 1);
+      }
     },
   },
 });
 
-export const { addRestoData, updateCategory } = restoSlice.actions;
+export const {
+  addRestoData,
+  incrementCartCount,
+  reduceCartCount,
+  deleteRecord,
+} = restoSlice.actions;
 
 export const store = configureStore({
   reducer: restoSlice.reducer,

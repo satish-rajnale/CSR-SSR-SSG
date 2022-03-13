@@ -7,4 +7,5 @@ export default interface RestaurantType {
   statusDesc: string;
   rating: string;
   category: string;
+  count?: number;
 }

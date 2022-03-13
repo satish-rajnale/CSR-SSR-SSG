@@ -13,7 +13,7 @@ import { auth } from "../functions/Firebase.prod";
 import { FiXSquare } from "react-icons/fi";
 import { BsPatchPlusFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { addRestoData, updateCategory } from "../store/restaurantReducer";
+import { addRestoData } from "../store/restaurantReducer";
 import Pagination from "../Containers/Pagination";
 import fetchRestaurants, {
   fetchNextRestaurantsList,

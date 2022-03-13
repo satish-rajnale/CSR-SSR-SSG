@@ -5,7 +5,7 @@ import { BiLogIn } from "react-icons/bi";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 import { useEffect, useState } from "react";
-
+import { incrementCartCount } from "../store/restaurantReducer";
 import { ReactReduxContext, useDispatch, useSelector } from "react-redux";
 
 function Food({
@@ -69,14 +69,15 @@ function Food({
           <div
             className={styles.button}
             onClick={() => {
-              dispatch({
-                type: "REDUCE_COUNT",
-                id: item.id,
-              });
-              dispatch({
-                type: "SET_SUBTOTAL",
-              });
-              updateCartCount();
+              // dispatch({
+              //   type: "REDUCE_COUNT",
+              //   id: item.id,
+              // });
+              // dispatch({
+              //   type: "SET_SUBTOTAL",
+              // });
+              // updateCartCount();
+              dispatch(incrementCartCount({ id: item.id }));
             }}
           >
             <AiOutlinePlus />
@@ -86,13 +87,13 @@ function Food({
             className={styles.button}
             onClick={() => {
               updateCartCount();
-              dispatch({
-                type: "INCREMENT_COUNT",
-                id: item.id,
-              });
-              dispatch({
-                type: "SET_SUBTOTAL",
-              });
+              // dispatch({
+              //   type: "INCREMENT_COUNT",
+              //   id: item.id,
+              // });
+              // dispatch({
+              //   type: "SET_SUBTOTAL",
+              // });
             }}
           >
             <AiOutlineMinus />
