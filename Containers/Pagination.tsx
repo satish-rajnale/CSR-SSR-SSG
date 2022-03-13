@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import Resaurant from "../Components/Product";
 import styles from "../styles/Home.module.css";
 import paginationStyles from "../styles/pagination.module.css";
 import {
   BsFillArrowRightSquareFill,
   BsFillArrowLeftSquareFill,
 } from "react-icons/bs";
+import Food from "../Components/Product";
 
 export default function Pagination({
   data,
@@ -19,9 +19,7 @@ export default function Pagination({
   const [currentPage, setCurrentPage] = useState(1);
 
   function goToNextPage() {
-    if (!(currentPage >= 34)) {
-      setCurrentPage((page) => page + 1);
-    }
+    setCurrentPage((page) => page + 1);
   }
 
   function goToPreviousPage() {
@@ -45,12 +43,7 @@ export default function Pagination({
 
   useEffect(() => {
     let noOfPages = getPaginationGroup();
-    if (
-      currentPage == noOfPages[noOfPages.length - 1] &&
-      !(currentPage >= 34) &&
-      searchValLength == 0 &&
-      filterByctg == ""
-    ) {
+    if (currentPage == noOfPages[noOfPages.length - 1]) {
       handleFetchNext();
     }
   }, [currentPage]);
@@ -58,7 +51,7 @@ export default function Pagination({
     <div>
       <section>
         {getPaginatedData().map((d, idx) => (
-          <Resaurant key={idx} item={d} openModal={openModal} />
+          <Food key={idx} item={d} openModal={openModal} />
         ))}
       </section>
 
@@ -88,15 +81,7 @@ export default function Pagination({
         <span
           test-id={"next"}
           onClick={goToNextPage}
-          className={`${paginationStyles.next}  ${
-            currentPage >= 34 ? paginationStyles.disabled : ""
-          } ${
-            filterByctg != "" || searchValLength > 3
-              ? currentPage == pageLimit
-                ? paginationStyles.disabled
-                : ""
-              : ""
-          }
+          className={`${paginationStyles.next}  
           `}
         >
           <BsFillArrowRightSquareFill />

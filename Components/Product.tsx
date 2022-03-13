@@ -3,9 +3,11 @@ import styles from "../styles/Card.module.css";
 import RestaurantType from "../types";
 import { BiFoodTag } from "react-icons/bi";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { MdDelete } from "react-icons/Md";
 
 import { useEffect, useState } from "react";
 import {
+  deleteRecord,
   incrementCartCount,
   reduceCartCount,
 } from "../store/restaurantReducer";
@@ -14,12 +16,12 @@ import { ReactReduxContext, useDispatch, useSelector } from "react-redux";
 function Food({
   item,
   openModal,
-  withclosebutton,
+  withRemoveBtn,
   isSidebarList,
 }: {
   item: RestaurantType;
   openModal: (val: RestaurantType) => void;
-  withclosebutton: boolean;
+  withRemoveBtn: boolean;
   isSidebarList: boolean;
 }) {
   const [productCount, setProductCount] = useState("0");
@@ -28,7 +30,6 @@ function Food({
     state.cart.filter((obj) => obj.id == item.id)
   );
 
-  console.log(product);
   useEffect(() => {
     if (product.length != 0) {
       setProductCount(product[0].count);
@@ -67,10 +68,10 @@ function Food({
         >
           EDIT
         </button> */}
-        {withclosebutton ? (
-          <button className={styles.button} onClick={() => {}}>
-            <BiFoodTag />
-          </button>
+        {withRemoveBtn ? (
+          <span onClick={() => dispatch(deleteRecord({ id: item.id }))}>
+            <MdDelete color="red" />
+          </span>
         ) : null}
         {!isSidebarList && (
           <p className={styles.statusDesc}>{item.statusDesc}</p>

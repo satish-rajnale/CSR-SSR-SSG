@@ -16,13 +16,13 @@ const restoStatus = [
   "People like consistency. Whether it's a store or a restaurant, they want to come in and see what you are famous for.",
 ];
 const images = [
-  "https://im1.dineout.co.in/images/uploads/restaurant/sharpen/1/c/v/p12737-15142932095a4247d95cd52.jpg?tr=tr:n-medium",
-  "https://im1.dineout.co.in/images/uploads/restaurant/sharpen/7/s/v/p73265-15776215315e08981bb0c73.jpg?tr=tr:n-medium",
-  "https://im1.dineout.co.in/images/uploads/restaurant/sharpen/8/h/b/p89882-1615626307604c804320f88.jpg?tr=tr:n-medium",
-  "https://im1.dineout.co.in/images/uploads/restaurant/sharpen/6/a/e/p69767-15742486145dd520a6f275c.jpg?tr=tr:n-medium",
-  "https://im1.dineout.co.in/images/uploads/restaurant/sharpen/7/p/e/p737-148757585558aa9b2f99519.jpg?tr=tr:n-medium",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvxAJcSQRs2u2vkyS5GoKLm66Op0CqWt0rjg&usqp=CAU",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0h7U3TsDSWF7CI3z31DZHGZA1viZ8Sexd8Q&usqp=CAU",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA5n046Ev-xGmh9X5BmwJ5Bm5GTcRWfIJIqg&usqp=CAU",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR23FPOXyos7d0Gwl8t7h6vXECsZKhTeJwtng&usqp=CAU",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlOlLfoQ_CBqbhal0YQbj4KPbwRQ8gotCPtw&usqp=CAU",
   "https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/j/b/p48258-15875515975ea01d6d7bcd9.jpg?tr=tr:n-medium",
-  "https://im1.dineout.co.in/images/uploads/restaurant/sharpen/5/q/e/p525-15483299905c49a406841dc.jpg?tr=tr:n-medium",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr0pBKhy3S3Ad_JS7sUDuUWrPOqMpJk-nFSA&usqp=CAU",
   "https://im1.dineout.co.in/images/uploads/restaurant/sharpen/5/c/h/p59-162642318760f13f93d8c77.jpg?tr=tr:n-medium",
 ];
 const addresses = [
@@ -88,7 +88,7 @@ export default async function handler(
   //   if (error) {
   //     throw error;
   //   }
-  console.log(data);
+  // console.log(data);
   if (data == undefined || null) {
     return;
   }
@@ -101,7 +101,7 @@ export default async function handler(
       image_url: "",
       statusDesc: "",
     };
-    obj.id = e.id;
+    obj.id = getUUID();
     obj.name = e.item_name;
     obj.price = e.price;
     let no = Math.round(Math.random() * 8);
@@ -119,7 +119,7 @@ export default async function handler(
     obj.category = categories[Math.floor(Math.random() * 2)];
     return obj;
   });
-  console.log(arr);
+  // console.log(arr);
   // seedDatabase(arr);
   res.status(200).send("Data uploaded");
   // });

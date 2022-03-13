@@ -83,9 +83,10 @@ const Home: NextPage = () => {
     setSearchBy(val);
     setSearchVal("");
   };
-
+  console.log("appstate", appState);
   const handleFetchNext = async () => {
     const fetchedData = await fetchNextRestaurantsList(appState.lastDoc);
+    console.log("next", fetchedData);
     if (typeof fetchedData == "string") {
       // dispatchToReducer({
       //   type: "error",
@@ -93,7 +94,12 @@ const Home: NextPage = () => {
       // });
     } else {
       const [last, data] = fetchedData.data;
-      const allData = [...storedata.allData].concat(data);
+      const modArr = data.map((item) => {
+        // item.count = 0;
+        // return item;
+        return Object.assign({}, item, { ...item, count: 0 });
+      });
+      const allData = [...storedata.allData].concat(modArr);
       dispatchToReducer({
         type: "updatedList",
         payload: { List: allData, LastDoc: last },
@@ -178,33 +184,10 @@ const Home: NextPage = () => {
       type: "closeMOdal",
     });
   };
-  const handleAddCategory = async () => {
-    let addFlag = await fetchNextRestaurantsList(
-      null,
-      categoryState.newCategory
-    );
-    if (!addFlag) {
-      dispatchToCategoryReducer({
-        type: "error",
-        payload: { errorMsg: "Category already exists" },
-      });
-    } else {
-      const newList = [...categoryState.categories].concat([
-        {
-          name: categoryState.newCategory,
-          ids: [],
-        },
-      ]);
-      dispatchToCategoryReducer({
-        type: "closeMOdal",
-        payload: { newList: newList },
-      });
-    }
-  };
 
   const modalObj = {
     dispatchToCategoryReducer,
-    handleAddCategory,
+
     handleItemCategory,
     categoryState,
   };
@@ -225,7 +208,7 @@ const Home: NextPage = () => {
           rel="stylesheet"
         />
       </Head>
-      <div style={{ position: "fixed" }}>
+      {/* <div style={{ position: "fixed" }}>
         <Link href={"/cart"}>
           <button
             type="button"
@@ -238,7 +221,7 @@ const Home: NextPage = () => {
             </span>
           </button>
         </Link>
-      </div>
+      </div> */}
 
       <div className={styles.main}>
         <div className={styles.mainContainer}>
@@ -310,7 +293,9 @@ const Home: NextPage = () => {
                 <h3>₹ {storedata.subtotal}</h3>
               </div>
             </div>
-            <button className={styles.checkoutBtn}>Checkout</button>
+            <Link href={"/cart"}>
+              <button className={styles.checkoutBtn}>Checkout</button>
+            </Link>
           </div>
         </div>
       </div>

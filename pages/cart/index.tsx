@@ -1,9 +1,11 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { BiLogOut } from "react-icons/bi";
+
 import { useDispatch, useSelector } from "react-redux";
-import Food from "../Components/Product";
-import styles from "../styles/CArt.module.css";
+import Food from "../../Components/Product";
+import { destroyCart } from "../../store/restaurantReducer";
+import styles from "../../styles/Cart.module.css";
 
 const cart = () => {
   const [productList, setProductList] = useState([]);
@@ -31,7 +33,6 @@ const cart = () => {
     }
   }, [cart, mainData]);
 
-  console.log(cart);
   useEffect(() => {
     if (subtotal <= 100) {
       setdiscount(0);
@@ -41,6 +42,11 @@ const cart = () => {
       setdiscount((subtotal * 20) / 100);
     }
   }, [subtotal]);
+
+  function submitCartAndBacktoHome() {
+    dispatch(destroyCart());
+    window.location.href = "/";
+  }
 
   return (
     <div className={styles.main}>
@@ -60,11 +66,15 @@ const cart = () => {
           </Link>
         </div>
         <div className={styles.centerContent}>
-          {productList.map((item, index) => (
-            <Food key={index} item={item} />
-          ))}
+          {productList.length > 0 ? (
+            productList.map((item, index) => (
+              <Food key={index} item={item} withRemoveBtn={true} />
+            ))
+          ) : (
+            <h1>NO ITEMS IN CART</h1>
+          )}
         </div>
-        <div>
+        <div style={{ marginLeft: "50px" }}>
           <div className={styles.summary}>
             <div className={styles.flexed}>
               {" "}
@@ -83,7 +93,9 @@ const cart = () => {
               <h3>Total:</h3> <h3>₹{subtotal - discount}</h3>
             </div>
           </div>
-          <button className={styles.cartBtn}>Proceed to Pay</button>
+          <button className={styles.cartBtn} onClick={submitCartAndBacktoHome}>
+            Proceed to Pay
+          </button>
         </div>
       </div>
     </div>

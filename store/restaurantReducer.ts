@@ -11,12 +11,7 @@ const restoSlice = createSlice({
   },
   reducers: {
     addRestoData: (state, action) => {
-      const modArr = [...action.payload.allData].map((item) => {
-        // item.count = 0;
-        // return item;
-        return Object.assign({}, item, { ...item, count: 0 });
-      });
-      state.allData = state.allData.concat(modArr);
+      state.allData = action.payload.allData;
       state.LastDoc = action.payload.LastDoc;
     },
     incrementCartCount: (state, action) => {
@@ -61,7 +56,7 @@ const restoSlice = createSlice({
         state.subtotal = subtotalCalc(state);
       }
     },
-    DESTROY_CART: (state, action) => {
+    destroyCart: (state, action) => {
       state.cart = [];
       state.subtotal = 0;
     },
@@ -92,6 +87,7 @@ export const {
   incrementCartCount,
   reduceCartCount,
   deleteRecord,
+  destroyCart,
 } = restoSlice.actions;
 
 export const store = configureStore({
