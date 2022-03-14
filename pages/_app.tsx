@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import styles from "../styles/home.module.css";
+import styles from "../styles/Home.module.css";
 
 import { Provider } from "react-redux";
 import { store } from "../store/restaurantReducer";

@@ -7,7 +7,7 @@ import React, {
   useReducer,
   useState,
 } from "react";
-import styles from "../styles/home.module.css";
+import styles from "../styles/Home.module.css";
 // import { signOut } from "firebase/auth";
 // import { auth } from "../functions/Firebase.prod";
 import { FiXSquare } from "react-icons/fi";

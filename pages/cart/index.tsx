@@ -6,7 +6,7 @@ import { BiLogOut } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import Food from "../../Components/Product";
 import { destroyCart } from "../../store/restaurantReducer";
-import styles from "../../styles/cart.module.css";
+import styles from "../../styles/Cart.module.css";
 
 const Cart: NextPage = () => {
   const [productList, setProductList] = useState([]);

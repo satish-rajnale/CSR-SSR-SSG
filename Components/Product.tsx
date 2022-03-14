@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/card.module.css";
+import styles from "../styles/Card.module.css";
 import RestaurantType from "../types";
 import { BiFoodTag } from "react-icons/bi";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "../styles/home.module.css";
+import styles from "../styles/Home.module.css";
 import paginationStyles from "../styles/pagination.module.css";
 import {
   BsFillArrowRightSquareFill,
