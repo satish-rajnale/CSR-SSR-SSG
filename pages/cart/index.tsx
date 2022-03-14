@@ -12,8 +12,11 @@ const Cart: NextPage = () => {
   const [productList, setProductList] = useState([]);
   const [discount, setdiscount] = useState(0);
   const dispatch = useDispatch();
+  /*@ts-ignore*/
   const cart = useSelector((state) => state.cart);
+  /*@ts-ignore*/
   const mainData = useSelector((state) => state.allData);
+  /*@ts-ignore*/
   const subtotal = useSelector((state) => state.subtotal);
   useEffect(() => {
     if (cart.length != 0) {

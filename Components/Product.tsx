@@ -24,7 +24,9 @@ function Food({
 }) {
   const [productCount, setProductCount] = useState("0");
   const dispatch = useDispatch();
+
   const product = useSelector((state) =>
+    /*@ts-ignore*/
     state.cart.filter((obj) => obj.id == item.id)
   );
 
