@@ -5,14 +5,13 @@ import {
   BsFillArrowRightSquareFill,
   BsFillArrowLeftSquareFill,
 } from "react-icons/bs";
-import Food from "../Components/Product";
+import Food from "../Components/Food";
 
 export default function Pagination({
   data,
-  searchValLength,
+
   handleFetchNext,
-  openModal,
-  filterByctg,
+
   pageLimit,
   dataLimit,
 }) {
@@ -82,7 +81,6 @@ export default function Pagination({
           </button>
         ))}
 
-        {/* next button */}
         <span
           test-id={"next"}
           onClick={goToNextPage}

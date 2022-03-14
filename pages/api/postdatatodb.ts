@@ -25,48 +25,7 @@ const images = [
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr0pBKhy3S3Ad_JS7sUDuUWrPOqMpJk-nFSA&usqp=CAU",
   "https://im1.dineout.co.in/images/uploads/restaurant/sharpen/5/c/h/p59-162642318760f13f93d8c77.jpg?tr=tr:n-medium",
 ];
-const addresses = [
-  {
-    city: "Port Lauren",
-    country: "Nauru",
-    state: "Pennsylvania",
-  },
-  {
-    city: "Port Noahmouth",
-    country: "Peru",
-    state: "Arizona",
-  },
-  {
-    city: "New Quintontown",
-    country: "South Africa",
-    state: "Hawaii",
-  },
-  {
-    city: "Port Adell",
-    country: "Chad",
-    state: "Colorado",
-  },
-  {
-    city: "Robertsshire",
-    country: "Italy",
-    state: "Massachusetts",
-  },
-  {
-    city: "South Gerhard",
-    country: "Bulgaria",
-    state: "New Mexico",
-  },
-  {
-    city: "Fatimachester",
-    country: "Costa Rica",
-    state: "Alaska",
-  },
-  {
-    city: "Rutherfordbury",
-    country: "Croatia",
-    state: "Utah",
-  },
-];
+
 function getUUID() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
     const piece = (Math.random() * 16) | 0;
@@ -84,11 +43,7 @@ export default async function handler(
     `https://run.mocky.io/v3/9d71cb03-a9f9-4d70-bae2-9d3adaa1cfe7`
   );
   const data = await resp.json();
-  // fs.readFile("./public/data.txt", (error: Error, data: any) => {
-  //   if (error) {
-  //     throw error;
-  //   }
-  // console.log(data);
+
   if (data == undefined || null) {
     return;
   }

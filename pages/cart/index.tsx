@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import { BiLogOut } from "react-icons/bi";
 
 import { useDispatch, useSelector } from "react-redux";
-import Food from "../../Components/Product";
-import { destroyCart } from "../../store/restaurantReducer";
+import Food from "../../Components/Food";
+import { destroyCart } from "../../store/foodReducerStore";
 import styles from "../../styles/Cart.module.css";
 
 const Cart: NextPage = () => {
@@ -29,8 +29,6 @@ const Cart: NextPage = () => {
     }
 
     setProductList(prodList);
-    //   setloading(false);
-    //   setsubTotal(gettotal);
   }, [cart, mainData]);
 
   useEffect(() => {
@@ -53,11 +51,7 @@ const Cart: NextPage = () => {
       <div className={styles.mainContainer}>
         <div style={{ position: "fixed", top: 0, left: 0 }}>
           <Link href={"/"} passHref>
-            <button
-              type="button"
-              className={styles.logoutBtn}
-              // onClick={signOutUser}
-            >
+            <button type="button" className={styles.logoutBtn}>
               <span className={styles.button__text}>go back</span>
               <span className={styles.button__icon}>
                 <BiLogOut />

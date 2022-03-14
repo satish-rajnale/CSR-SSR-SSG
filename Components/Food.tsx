@@ -10,7 +10,7 @@ import {
   deleteRecord,
   incrementCartCount,
   reduceCartCount,
-} from "../store/restaurantReducer";
+} from "../store/foodReducerStore";
 import { ReactReduxContext, useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 
@@ -71,7 +71,10 @@ function Food({
         {!isSidebarList && <h4 className={styles.price}>₹{item.price}</h4>}
 
         {withRemoveBtn ? (
-          <div onClick={() => dispatch(deleteRecord({ id: item.id }))}>
+          <div
+            onClick={() => dispatch(deleteRecord({ id: item.id }))}
+            data-testid="deleteItem"
+          >
             <MdDelete color="red" />
           </div>
         ) : null}
@@ -101,15 +104,8 @@ function Food({
                 ? { width: "30px", height: "30px" }
                 : { display: "flex" }
             }
+            data-testid={`incrementCount${item.id}`}
             onClick={() => {
-              // dispatch({
-              //   type: "REDUCE_COUNT",
-              //   id: item.id,
-              // });
-              // dispatch({
-              //   type: "SET_SUBTOTAL",
-              // });
-              // updateCartCount();
               dispatch(incrementCartCount({ id: item.id }));
             }}
           >
@@ -132,15 +128,10 @@ function Food({
                 ? { width: "30px", height: "30px" }
                 : { alignItems: "center" }
             }
+            data-testid={`decrementCount${item.id}`}
             onClick={() => {
               updateCartCount();
-              // dispatch({
-              //   type: "INCREMENT_COUNT",
-              //   id: item.id,
-              // });
-              // dispatch({
-              //   type: "SET_SUBTOTAL",
-              // });
+
               dispatch(reduceCartCount({ id: item.id }));
             }}
           >

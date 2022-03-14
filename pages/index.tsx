@@ -8,40 +8,24 @@ import React, {
   useState,
 } from "react";
 import styles from "../styles/Home.module.css";
-// import { signOut } from "firebase/auth";
-// import { auth } from "../functions/Firebase.prod";
+
 import { FiXSquare } from "react-icons/fi";
 import { BsPatchPlusFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { addRestoData } from "../store/restaurantReducer";
+import { addRestoData } from "../store/foodReducerStore";
 import Pagination from "../Containers/Pagination";
 import fetchRestaurants, {
   fetchNextRestaurantsList,
-  updateRestaurantCategory,
 } from "../services/fetchData";
-import UpdateCategory from "../Components/UpdateCategory";
-import fetchReducer, { initialState } from "../Reducers/restaurantlistReducer";
-import categoryReducer, {
-  initialStateCategory,
-} from "../Reducers/categoriesReducer";
-import { BiLogOut } from "react-icons/bi";
-import RestaurantType from "../types";
+import fetchReducer, { initialState } from "../Reducers/foodlistReducer";
+
 import Header from "../Components/Header";
 import Link from "next/link";
-import Food from "../Components/Product";
+import Food from "../Components/Food";
+let initialized = false;
 const Home: NextPage = () => {
   const [appState, dispatchToReducer] = useReducer(fetchReducer, initialState);
-  const [categoryState, dispatchToCategoryReducer] = useReducer(
-    categoryReducer,
-    initialStateCategory
-  );
-  const [searchVal, setSearchVal] = useState<string>("");
-  const [searchBy, setSearchBy] = useState<string>("name");
-  const [filterByctg, setFilterByctg] = useState<string>("");
-
   const storedata: any = useSelector((state) => state);
-  const searchValLength: number = searchVal.length;
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,19 +38,18 @@ const Home: NextPage = () => {
           payload: { errorMsg: fetchedData },
         });
       } else {
-        const [last, data, categoryList] = fetchedData.data;
+        const [last, data] = fetchedData.data;
         await dispatch(addRestoData({ allData: data, LastDoc: last }));
         await dispatchToReducer({
           type: "success",
           payload: { List: data, LastDoc: last },
         });
-        dispatchToCategoryReducer({
-          type: "success",
-          payload: { List: categoryList },
-        });
       }
     }
-    fetchData();
+    if (!initialized) {
+      fetchData();
+      initialized = true;
+    }
   }, []);
 
   useEffect(() => {
@@ -76,14 +59,8 @@ const Home: NextPage = () => {
     });
   }, [storedata]);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchVal(e.target.value);
-  };
-  const handleSearchBy = (val: string) => {
-    setSearchBy(val);
-    setSearchVal("");
-  };
   console.log("appstate", appState);
+  console.log("cartstate", storedata);
   const handleFetchNext = async () => {
     const fetchedData = await fetchNextRestaurantsList(appState.lastDoc);
     console.log("next", fetchedData);
@@ -94,11 +71,7 @@ const Home: NextPage = () => {
       });
     } else {
       const [last, data] = fetchedData.data;
-      // const modArr = data.map((item) => {
-      //   // item.count = 0;
-      //   // return item;
-      //   return Object.assign({}, item, { ...item, count: 0 });
-      // });
+
       const allData = [...storedata.allData].concat(data);
       dispatchToReducer({
         type: "updatedList",
@@ -109,81 +82,6 @@ const Home: NextPage = () => {
     }
   };
 
-  const filteredData = useMemo(() => {
-    let filteredData: RestaurantType[] = [];
-    if (searchVal != "" && searchVal.length > 3) {
-      filteredData = storedata.allData.filter((obj) => {
-        let isArray = Array.isArray(obj[searchBy]);
-        if (isArray) {
-          let index = obj[searchBy].findIndex((e) =>
-            e.toLocaleLowerCase().includes(searchVal.toLocaleLowerCase())
-          );
-
-          if (index !== -1) {
-            return obj;
-          }
-        } else if (
-          obj[searchBy]
-            .toLocaleLowerCase()
-            .includes(searchVal.toLocaleLowerCase())
-        ) {
-          return obj;
-        }
-      });
-    }
-
-    return filteredData;
-  }, [searchVal, searchBy]);
-
-  const filterDataByCtg = useMemo(() => {
-    let filteredData: RestaurantType[] = [];
-    if (filterByctg != "") {
-      filteredData = storedata.allData.filter((obj) => {
-        if (obj.category == filterByctg) {
-          return obj;
-        }
-      });
-    }
-
-    return filteredData;
-  }, [filterByctg]);
-
-  useEffect(() => {
-    if (filteredData.length > 0 && searchVal.length > 3) {
-      dispatchToReducer({
-        type: "updatedList",
-        payload: { List: filteredData },
-      });
-    } else if (filterByctg !== "") {
-      dispatchToReducer({
-        type: "updatedList",
-        payload: { List: filterDataByCtg },
-      });
-    } else {
-      dispatchToReducer({
-        type: "updatedList",
-        payload: { List: storedata.allData },
-      });
-    }
-  }, [filteredData, filterDataByCtg]);
-
-  const handleItemCategory = async (val) => {
-    await updateRestaurantCategory(
-      categoryState.selectedresto,
-      categoryState.selectedCategory
-    );
-
-    await dispatchToCategoryReducer({
-      type: "closeMOdal",
-    });
-  };
-
-  const modalObj = {
-    dispatchToCategoryReducer,
-
-    handleItemCategory,
-    categoryState,
-  };
   return (
     <div className={styles.container}>
       <Head>
@@ -201,20 +99,6 @@ const Home: NextPage = () => {
           rel="stylesheet"
         />
       </Head>
-      {/* <div style={{ position: "fixed" }}>
-        <Link href={"/cart"}>
-          <button
-            type="button"
-            className={styles.logoutBtn}
-            // onClick={signOutUser}
-          >
-            <span className={styles.button__text}> Go to CArt</span>
-            <span className={styles.button__icon}>
-              <BiLogOut />
-            </span>
-          </button>
-        </Link>
-      </div> */}
 
       <div className={styles.main}>
         <div className={styles.mainContainer}>
@@ -228,15 +112,7 @@ const Home: NextPage = () => {
             ) : (
               <>
                 <Pagination
-                  data={appState.restaurantList}
-                  filterByctg={filterByctg}
-                  searchValLength={searchValLength}
-                  openModal={(val: RestaurantType) =>
-                    dispatchToCategoryReducer({
-                      type: "openMOdal",
-                      payload: { resto: val },
-                    })
-                  }
+                  data={storedata.allData}
                   handleFetchNext={handleFetchNext}
                   pageLimit={3}
                   dataLimit={3}
@@ -269,6 +145,7 @@ const Home: NextPage = () => {
                   let item = storedata.allData.find(
                     (obj1) => obj1.id == obj.id
                   );
+                  console.log("item created", item);
                   return (
                     <Food
                       key={index}

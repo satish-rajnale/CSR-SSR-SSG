@@ -1,7 +1,8 @@
 {
-  "name": "nextjs-pokemon-modes",
+  "name": "foods-cart-app",
   "version": "0.1.0",
   "private": true,
+  "author": "satish",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

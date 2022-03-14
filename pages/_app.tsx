@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import styles from "../styles/Home.module.css";
 
 import { Provider } from "react-redux";
-import { store } from "../store/restaurantReducer";
+import { store } from "../store/foodReducerStore";
 import { useEffect } from "react";
 import { auth } from "../functions/Firebase.prod";
 import { useAuthState } from "react-firebase-hooks/auth";

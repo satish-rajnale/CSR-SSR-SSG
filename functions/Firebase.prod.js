@@ -51,12 +51,10 @@ export async function seedDatabase(data) {
 
   // const todoData = {
   //   id: getUUID(),
-  //   name: "Tiger King",
-  //   opening_times: ["An ", "asd"],
+  //   name: "burger",
+  //   price: 230,
   //   image_url: "documentaries",
-  //   rating: "4",
-  //   category: "tiger-king",
-  //   address: "dfsdsdf",
+  //   category: "veg",
   //   statusDesc: "",
   // };
   data.forEach(async (obj) => {
@@ -94,29 +92,4 @@ export const getDocsData = async (isNext, lastDoc) => {
     });
   }
   return [lastVisible.data(), result, categories];
-};
-
-export const updateToDB = async (data, selectedCategory) => {
-  const resto = doc(firestore, `restaurants/${data.id}`);
-  await updateDoc(resto, {
-    category: selectedCategory,
-  });
-  // const category = doc(firestore, `categories/${selectedCategory}`);
-  // const ids = categories.find((obj) => obj.name == selectedCategory).ids;
-  // const unionRes = await category.update({
-  //   idList: FieldValue.arrayUnion(selectedCategory),
-  // });
-};
-
-export const addCategoryToDB = async (name) => {
-  const docRef = doc(firestore, "categories", name);
-  const docExists = await getDoc(docRef);
-  if (!docExists.exists()) {
-    const idList = [];
-    const singleDoc = doc(firestore, `categories/${name}`);
-    await setDoc(singleDoc, { idList });
-    return true;
-  } else {
-    return false;
-  }
 };

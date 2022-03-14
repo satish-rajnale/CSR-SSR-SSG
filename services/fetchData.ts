@@ -35,22 +35,4 @@ export const fetchNextRestaurantsList = async (
   return data;
 };
 
-export const updateRestaurantCategory = async (
-  selectedresto: RestaurantType,
-  selectedCategory: string
-) => {
-  await fetch(`/api/getrestaurants`, {
-    method: "PUT",
-    body: JSON.stringify({
-      selectedresto: selectedresto,
-      selectedCategory: selectedCategory,
-    }),
-  })
-    .then((res: Response) => console.log(res))
-    .catch((reason) => {
-      console.log("err", reason);
-      return "Something went wrong!";
-    });
-};
-
 export default fetchRestaurants;
