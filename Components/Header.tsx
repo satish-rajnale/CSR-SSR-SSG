@@ -4,7 +4,7 @@ import styles from "../styles/Header.module.css";
 function Header() {
   return (
     <div className={styles.header}>
-      <p>McDonald's</p>
+      <p>{"McDonald's"}</p>
     </div>
   );
 }

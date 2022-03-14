@@ -12,6 +12,7 @@ import {
   reduceCartCount,
 } from "../store/restaurantReducer";
 import { ReactReduxContext, useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
 
 function Food({
   item,
@@ -80,7 +81,7 @@ function Food({
       </div>
       <div>
         {!isSidebarList && (
-          <img className={styles.image} src={item.image_url} alt="food" />
+          <Image className={styles.image} src={item.image_url} alt="food" />
         )}
         <div
           style={{

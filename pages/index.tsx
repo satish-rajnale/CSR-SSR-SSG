@@ -293,7 +293,7 @@ const Home: NextPage = () => {
                 <h3>₹ {storedata.subtotal}</h3>
               </div>
             </div>
-            <Link href={"/cart"}>
+            <Link href={"/cart"} passHref>
               <button className={styles.checkoutBtn}>Checkout</button>
             </Link>
           </div>

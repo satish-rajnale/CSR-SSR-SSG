@@ -52,7 +52,7 @@ const Cart: NextPage = () => {
     <div className={styles.main}>
       <div className={styles.mainContainer}>
         <div style={{ position: "fixed", top: 0, left: 0 }}>
-          <Link href={"/"}>
+          <Link href={"/"} passHref>
             <button
               type="button"
               className={styles.logoutBtn}

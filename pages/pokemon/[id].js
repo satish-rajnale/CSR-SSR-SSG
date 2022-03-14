@@ -5,6 +5,7 @@ import Link from "next/link";
 import styles from "../../styles/Details.module.css";
 import { useEffect, useState } from "react/cjs/react.development";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 // export async function getStaticPaths() {
 //   const resp = await fetch(
@@ -76,13 +77,13 @@ export default function Details() {
         <title>{pokemon.name}</title>
       </Head>
       <div>
-        <Link href="/">
+        <Link href="/" passHref>
           <a>Back to Home</a>
         </Link>
       </div>
       <div className={styles.layout}>
         <div>
-          <img
+          <Image
             className={styles.picture}
             src={`https://jherr-pokemon.s3.us-west-1.amazonaws.com/${pokemon.image}`}
             alt={pokemon.name.english}
