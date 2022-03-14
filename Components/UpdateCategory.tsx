@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "./MOdal";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/home.module.css";
 function UpdateCategory({
   dispatchToCategoryReducer,
   handleAddCategory,

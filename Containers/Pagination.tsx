@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styles from "../styles/home.module.css";
 import paginationStyles from "../styles/pagination.module.css";
 import {
   BsFillArrowRightSquareFill,
@@ -53,8 +54,8 @@ export default function Pagination({
           <Food
             key={idx}
             item={d}
-            withRemoveBtn={false}
             isSidebarList={false}
+            withRemoveBtn={false}
           />
         ))}
       </section>

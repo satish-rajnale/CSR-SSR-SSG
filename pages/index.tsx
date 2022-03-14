@@ -7,9 +7,9 @@ import React, {
   useReducer,
   useState,
 } from "react";
-import styles from "../styles/Home.module.css";
-import { signOut } from "firebase/auth";
-import { auth } from "../functions/Firebase.prod";
+import styles from "../styles/home.module.css";
+// import { signOut } from "firebase/auth";
+// import { auth } from "../functions/Firebase.prod";
 import { FiXSquare } from "react-icons/fi";
 import { BsPatchPlusFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
@@ -88,18 +88,18 @@ const Home: NextPage = () => {
     const fetchedData = await fetchNextRestaurantsList(appState.lastDoc);
     console.log("next", fetchedData);
     if (typeof fetchedData == "string") {
-      // dispatchToReducer({
-      //   type: "error",
-      //   payload: { errorMsg: fetchedData },
-      // });
+      dispatchToReducer({
+        type: "error",
+        payload: { errorMsg: fetchedData },
+      });
     } else {
       const [last, data] = fetchedData.data;
-      const modArr = data.map((item) => {
-        // item.count = 0;
-        // return item;
-        return Object.assign({}, item, { ...item, count: 0 });
-      });
-      const allData = [...storedata.allData].concat(modArr);
+      // const modArr = data.map((item) => {
+      //   // item.count = 0;
+      //   // return item;
+      //   return Object.assign({}, item, { ...item, count: 0 });
+      // });
+      const allData = [...storedata.allData].concat(data);
       dispatchToReducer({
         type: "updatedList",
         payload: { List: allData, LastDoc: last },
@@ -167,13 +167,6 @@ const Home: NextPage = () => {
     }
   }, [filteredData, filterDataByCtg]);
 
-  function signOutUser() {
-    signOut(auth);
-  }
-  function resetFilters() {
-    setSearchVal("");
-    setFilterByctg("");
-  }
   const handleItemCategory = async (val) => {
     await updateRestaurantCategory(
       categoryState.selectedresto,

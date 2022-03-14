@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/Card.module.css";
+import styles from "../styles/card.module.css";
 import RestaurantType from "../types";
 import { BiFoodTag } from "react-icons/bi";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
@@ -24,7 +24,6 @@ function Food({
 }) {
   const [productCount, setProductCount] = useState("0");
   const dispatch = useDispatch();
-
   const product = useSelector((state) =>
     /*@ts-ignore*/
     state.cart.filter((obj) => obj.id == item.id)
@@ -42,29 +41,38 @@ function Food({
   return (
     <div
       className={styles.card}
-      style={isSidebarList && { minHeight: "100px" }}
+      style={isSidebarList ? { minHeight: "100px" } : { minHeight: "auto" }}
     >
       <div
         className={styles.content}
-        style={isSidebarList && { padding: 0, justifyContent: "space-evenly" }}
+        style={
+          isSidebarList
+            ? { padding: 0, justifyContent: "space-evenly" }
+            : { padding: "10px" }
+        }
       >
         <div
           className={styles.category}
           data-testid={`card-category`}
-          style={isSidebarList && { position: "relative" }}
+          style={
+            isSidebarList ? { position: "relative" } : { display: "block" }
+          }
         >
           <BiFoodTag color={item.category == "veg" ? "green" : "red"} />
         </div>
-        <h4 className={styles.name} style={isSidebarList && { width: "120px" }}>
+        <h4
+          className={styles.name}
+          style={isSidebarList ? { width: "120px" } : { display: "flex" }}
+        >
           {item.name}
         </h4>
 
         {!isSidebarList && <h4 className={styles.price}>₹{item.price}</h4>}
 
         {withRemoveBtn ? (
-          <span onClick={() => dispatch(deleteRecord({ id: item.id }))}>
+          <div onClick={() => dispatch(deleteRecord({ id: item.id }))}>
             <MdDelete color="red" />
-          </span>
+          </div>
         ) : null}
         {!isSidebarList && (
           <p className={styles.statusDesc}>{item.statusDesc}</p>
@@ -72,22 +80,26 @@ function Food({
       </div>
       <div>
         {!isSidebarList && (
-          <img className={styles.image} src={item.image_url} />
+          <img className={styles.image} src={item.image_url} alt="food" />
         )}
         <div
           style={{
             display: "flex",
             flexDirection: "row",
             position: "relative",
-            right: !isSidebarList && "-10%",
+            right: !isSidebarList ? "-10%" : "auto",
             width: "fit-content",
             border: "1px solid black",
-            bottom: !isSidebarList && 26,
+            bottom: !isSidebarList ? 26 : "auto",
           }}
         >
           <div
             className={styles.button}
-            style={isSidebarList && { width: "30px", height: "30px" }}
+            style={
+              isSidebarList
+                ? { width: "30px", height: "30px" }
+                : { display: "flex" }
+            }
             onClick={() => {
               // dispatch({
               //   type: "REDUCE_COUNT",
@@ -105,11 +117,20 @@ function Food({
           <input
             className={styles.input}
             value={String(productCount)}
-            style={isSidebarList && { width: "30px", height: "30px" }}
+            style={
+              isSidebarList
+                ? { width: "30px", height: "30px" }
+                : { color: "#000" }
+            }
+            onChange={(e) => setProductCount(e.target.value)}
           />
           <div
             className={styles.button}
-            style={isSidebarList && { width: "30px", height: "30px" }}
+            style={
+              isSidebarList
+                ? { width: "30px", height: "30px" }
+                : { alignItems: "center" }
+            }
             onClick={() => {
               updateCartCount();
               // dispatch({

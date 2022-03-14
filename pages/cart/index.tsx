@@ -6,7 +6,7 @@ import { BiLogOut } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import Food from "../../Components/Product";
 import { destroyCart } from "../../store/restaurantReducer";
-import styles from "../../styles/Cart.module.css";
+import styles from "../../styles/cart.module.css";
 
 const Cart: NextPage = () => {
   const [productList, setProductList] = useState([]);
@@ -19,22 +19,18 @@ const Cart: NextPage = () => {
   /*@ts-ignore*/
   const subtotal = useSelector((state) => state.subtotal);
   useEffect(() => {
-    if (cart.length != 0) {
-      const prodList = [];
-      for (let obj of mainData) {
-        for (let cartObj of cart) {
-          if (cartObj.id == obj.id && cartObj.count != 0) {
-            prodList.push(obj);
-          }
+    const prodList = [];
+    for (let obj of mainData) {
+      for (let cartObj of cart) {
+        if (cartObj.id == obj.id && cartObj.count != 0) {
+          prodList.push(obj);
         }
       }
-
-      setProductList(prodList);
-      //   setloading(false);
-      //   setsubTotal(gettotal);
-    } else {
-      //   setloading(false);
     }
+
+    setProductList(prodList);
+    //   setloading(false);
+    //   setsubTotal(gettotal);
   }, [cart, mainData]);
 
   useEffect(() => {
@@ -51,7 +47,7 @@ const Cart: NextPage = () => {
     dispatch(destroyCart({}));
     window.location.href = "/";
   }
-
+  console.log(cart, productList);
   return (
     <div className={styles.main}>
       <div className={styles.mainContainer}>

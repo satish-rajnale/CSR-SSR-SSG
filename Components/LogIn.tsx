@@ -1,6 +1,6 @@
 import React from "react";
 import { signInWithPopup } from "firebase/auth";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/home.module.css";
 import { BiLogIn } from "react-icons/bi";
 import { auth, provider } from "../functions/Firebase.prod";
 function LogIn() {
