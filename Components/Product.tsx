@@ -81,7 +81,7 @@ function Food({
       </div>
       <div>
         {!isSidebarList && (
-          <Image className={styles.image} src={item.image_url} alt="food" />
+          <img className={styles.image} src={item.image_url} alt="food" />
         )}
         <div
           style={{

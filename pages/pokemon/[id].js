@@ -83,7 +83,7 @@ export default function Details() {
       </div>
       <div className={styles.layout}>
         <div>
-          <Image
+          <img
             className={styles.picture}
             src={`https://jherr-pokemon.s3.us-west-1.amazonaws.com/${pokemon.image}`}
             alt={pokemon.name.english}
